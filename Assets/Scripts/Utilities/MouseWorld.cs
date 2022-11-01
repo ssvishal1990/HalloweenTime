@@ -7,6 +7,7 @@ public class MouseWorld : MonoBehaviour
     private static MouseWorld instance;
     [SerializeField] private LayerMask mouseLayerMask;
 
+    private static bool thisNodeIsValid;
     private void Awake()
     {
         if (instance != null)
@@ -16,12 +17,34 @@ public class MouseWorld : MonoBehaviour
             return;
         }
         instance = this;
+        thisNodeIsValid = false;
     }
 
     public static Vector3 GetPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, instance.mouseLayerMask);
+        bool rayHit = Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, instance.mouseLayerMask);
+        if (rayHit)
+        {
+            thisNodeIsValid = true;
+            foreach (Transform child in raycastHit.transform)
+            {
+                if (child.TryGetComponent<CoordinateLabeler>(out CoordinateLabeler coordinateLabeler))
+                {
+                    bool status = GridSystem.Instance.getNodeTraversableStatus(coordinateLabeler.getCoordinates());
+                    Debug.Log("Node with Coordinate Label -> " + coordinateLabeler.getCoordinates() + "  traversable status  " + status);
+                }
+            }
+        }else
+        {
+            thisNodeIsValid=false;
+        }
+        
         return raycastHit.point;
+    }
+
+    public static bool checkIfValidNodeWasSelected()
+    {
+        return thisNodeIsValid;
     }
 }

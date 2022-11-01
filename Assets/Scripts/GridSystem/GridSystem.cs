@@ -1,3 +1,5 @@
+using Assets.Scripts.GridSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +19,12 @@ public class GridSystem : MonoBehaviour
 
     [SerializeField] private int snapXEditorSetting;
     [SerializeField] private int snapYEditorSetting;
+    [SerializeField] private int mapSizeX;
+    [SerializeField] private int mapSizeY;
+
+
+
+    Coordinate[,] wayPoints;
 
     private void Awake()
     {
@@ -27,7 +35,21 @@ public class GridSystem : MonoBehaviour
             return;
         }
         Instance = this;
+        InitializeWayPoints();
     }
+
+    private void InitializeWayPoints()
+    {
+        wayPoints = new Coordinate[mapSizeX + 1, mapSizeY + 1];
+        for (int x = 0; x <= mapSizeX; x++)
+        {
+            for (int y = 0; y <= mapSizeY; y++)
+            {
+                wayPoints[x, y] = new Coordinate(new Vector2Int(x, y));
+            }
+        }
+    }
+
     public Vector2Int worldPositionToCoorDinatePosition(Vector3 worldPosition)
     {
         Vector2Int coorDinatePosition = new Vector2Int();
@@ -51,5 +73,15 @@ public class GridSystem : MonoBehaviour
             && playerCurrentPosition.y == playerDesiredPosition.y)
             return true;
         return false;
+    }
+
+    public void SetCoordinateTraversable(int x, int y)
+    {
+        wayPoints[x, y].setNodeTraverSable();
+    }
+
+    public bool getNodeTraversableStatus(Vector2Int coordinate)
+    {
+        return wayPoints[coordinate.x, coordinate.y].getTraversalStatus();
     }
 }

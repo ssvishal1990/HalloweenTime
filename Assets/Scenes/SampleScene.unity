@@ -5720,8 +5720,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: -0.32286698, y: -0.0134414965, z: 0.006135052, w: -0.94632906}
-  m_LocalPosition: {x: 9.398723, y: 9.800313, z: -5.1481466}
+  m_LocalRotation: {x: 0.68733585, y: -0.00049522234, z: -0.0014400462, w: 0.7263382}
+  m_LocalPosition: {x: 16.300705, y: 14.635473, z: 5.782954}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7828,6 +7828,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snapXEditorSetting: 1
   snapYEditorSetting: 1
+  mapSizeX: 31
+  mapSizeY: 32
 --- !u!4 &474698206
 Transform:
   m_ObjectHideFlags: 0

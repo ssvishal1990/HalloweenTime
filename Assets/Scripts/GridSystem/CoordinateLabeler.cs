@@ -49,4 +49,9 @@ public class CoordinateLabeler : MonoBehaviour
         coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
         coordinateLabel.text = coordinates.x + " ," + coordinates.y;
     }
+
+    public Vector2Int getCoordinates()
+    {
+        return coordinates;
+    }
 }

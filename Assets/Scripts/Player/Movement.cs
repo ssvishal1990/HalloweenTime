@@ -52,11 +52,13 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             targetPosition = MouseWorld.GetPosition();
+            if (!MouseWorld.checkIfValidNodeWasSelected())
+            {
+                return;
+            }
             tartgetCoorDinate = GridSystem.Instance.worldPositionToCoorDinatePosition(targetPosition);
             PlayerIsOnRequiredLocation();
         }
-        
-
     }
 
     private bool PlayerIsOnRequiredLocation()
