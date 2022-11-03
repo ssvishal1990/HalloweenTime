@@ -1,3 +1,4 @@
+using Assets.Scripts.GridSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,11 +28,12 @@ public class MouseWorld : MonoBehaviour
         if (rayHit)
         {
             thisNodeIsValid = true;
+            Debug.Log("Inside get position");
             foreach (Transform child in raycastHit.transform)
             {
                 if (child.TryGetComponent<CoordinateLabeler>(out CoordinateLabeler coordinateLabeler))
                 {
-                    bool status = GridSystem.Instance.getNodeTraversableStatus(coordinateLabeler.getCoordinates());
+                    bool status = GridSystem.Instance.Grid.ContainsKey(coordinateLabeler.getCoordinates());
                     Debug.Log("Node with Coordinate Label -> " + coordinateLabeler.getCoordinates() + "  traversable status  " + status);
                 }
             }

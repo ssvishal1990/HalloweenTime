@@ -1,3 +1,4 @@
+using Assets.Scripts.GridSystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,12 +15,14 @@ public class WayPoint : MonoBehaviour
     private void Awake()
     {
         coordinateLabeler = GetComponent<CoordinateLabeler>();
-        coordinates = coordinateLabeler.getCoordinates();
+        
     }
 
     private void Start()
     {
-        GridSystem.Instance.SetCoordinateTraversable(coordinates.x, coordinates.y);
+        coordinates = coordinateLabeler.getCoordinates();
+        //GridSystem.Instance.SetCoordinateTraversable(coordinates.x, coordinates.y);
+        GridSystem.Instance.AddNodeIntoDictionary(coordinates);
     }
 
 
